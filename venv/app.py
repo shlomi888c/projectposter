@@ -22,7 +22,7 @@ def _get_json(url):
 
 def _download_images(urls, path='.'):
 
-    for nr, url in enumerate(urls[:5]):
+    for nr, url in enumerate(urls[:1]):
         r = requests.get(url)
         filetype = r.headers['content-type'].split('/')[-1]
         filename = 'title' + '_{0}.{1}'.format(nr + 1, filetype)
