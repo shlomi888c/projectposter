@@ -13,7 +13,7 @@ CONFIG_PATTERN = 'http://api.themoviedb.org/3/configuration?api_key=0cc913ce4bb1
 IMG_PATTERN = 'http://api.themoviedb.org/3/movie/{imdbid}/images?api_key=0cc913ce4bb1b776d2e5f84ad059c224'
 KEY = '0cc913ce4bb1b776d2e5f84ad059c224'
 
-# title = input("please enter the movie name")
+
 
 def _get_json(url):
     r = requests.get(url)
@@ -21,10 +21,11 @@ def _get_json(url):
 
 
 def _download_images(urls, path='.'):
-
+    """download all images in list 'urls' to 'path' and  download image from imdb straight into mongo"""
     for nr, url in enumerate(urls[:1]):
         r = requests.get(url)
         filetype = r.headers['content-type'].split('/')[-1]
+        print(filetype)
         filename = 'title' + '_{0}.{1}'.format(nr + 1, filetype)
         filepath = os.path.join(path, filename)
         with open(filepath, 'wb') as w:
@@ -78,15 +79,14 @@ def tmdb_posters(imdbid, count=None, outpath='.'):
 
 
 def find_id(name_movie):
+
     global id
     ia = imdb.IMDb()
     search = ia.search_movie(name_movie)
-    s = search
     open('../info.txt', 'w').write(str(search))
     text = open('../info.txt', 'r')
     idn = text.read()
     id = "tt" + idn[11:18]
-    print(id)
     return tmdb_posters(id)
 
 

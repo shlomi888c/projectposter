@@ -6,7 +6,7 @@ app = Flask(__name__)
 import imdb
 client = MongoClient("db", 27017)
 
-db1 = client.DB_NAME
+db1 = client["DB_NAME"]
 
 
 
@@ -14,7 +14,9 @@ db1 = client.DB_NAME
 def handle_data():
     global projectpath
     projectpath = request.form['projectFilepath']
+    # find the id of movie and save it in mongo database
     (find_id(projectpath))
+    # show the images and results of the search method
     ia = imdb.IMDb()
     search = ia.search_movie(projectpath)
     s = search
@@ -30,13 +32,10 @@ def handle_data():
     response.content_type="image/webp"
     return response
 
-@app.route("/")
+@app.route("/index")
 def index():
     return render_template("index.html")
 
-@app.route("/index")
-def index1():
-    return "hello"
 
 
 if __name__ == '__main__':

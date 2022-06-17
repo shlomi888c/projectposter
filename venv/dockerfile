@@ -1,5 +1,5 @@
 # Step 1 select default OS image
-FROM alpine
+FROM alpine:latest
 # Step 2 Setting up environment
 RUN apk add --no-cache python3-dev && apk add py3-pip
 RUN pip3 install --upgrade pip
