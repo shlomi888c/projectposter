@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request , make_response
 from pymongo import MongoClient, response
-from app1 import find_id
+from app import find_id
 import gridfs
 app = Flask(__name__)
 import imdb
