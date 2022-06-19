@@ -62,7 +62,7 @@ resource "aws_route_table_association" "a" {
   route_table_id = aws_route_table.route-table.id
 }
 
-# Creating Security Group to Allow docker Traffic and ssh
+# Creating Security Group to Allow webapp Traffic and ssh
 
 resource "aws_security_group" "allow_traffic" {
   name        = "allow traffic"
@@ -70,7 +70,7 @@ resource "aws_security_group" "allow_traffic" {
   vpc_id      = aws_vpc.main.id
 
  ingress {
-    description      = "docker"
+    description      = "webapp"
     from_port        = 5001
     to_port          = 5001
     protocol         = "tcp"
